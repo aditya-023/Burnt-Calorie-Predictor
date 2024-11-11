@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Burnt Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Calorie Burnt Prediction</h2>
+        <form action="/predict" method="post">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select><br><br>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="height">Height (cm):</label>
+            <input type="number" step="0.1" name="height" required>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" step="0.1" name="weight" required>
+
+            <label for="duration">Duration (mins):</label>
+            <input type="number" step="0.1" name="duration" required>
+
+            <label for="heart_rate">Heart Rate:</label>
+            <input type="number" step="0.1" name="heart_rate" required>
+
+            <label for="temp">Body Temperature:</label>
+            <input type="number" step="0.1" name="temp" required>
+            
+            <input type="submit" value="Predict">
+        </form>
+        
+        {% if prediction %}
+        <div class="result">Predicted Calories Burned: {{ prediction }}</div>
+        {% elif error %}
+        <div class="result" style="color:red;">Error: {{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
